@@ -26,7 +26,6 @@ func on_damageable_hit(_node : Node, _damage_amount : int, knockback_direction :
 	else:
 		character.velocity = Vector2.ZERO
 		emit_signal("interrupt_state", dead_state)
-		playback.travel(dead_animation_node)
 
 func _on_timer_timeout():
 	next_state = move_state

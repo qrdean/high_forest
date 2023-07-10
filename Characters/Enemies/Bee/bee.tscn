@@ -6,13 +6,14 @@
 [ext_resource type="Script" path="res://Characters/Enemies/Bee/bee.gd" id="1_p4d53"]
 [ext_resource type="Script" path="res://Characters/Damageable.gd" id="4_rngo5"]
 [ext_resource type="Script" path="res://Characters/CharacterStateMachine.gd" id="5_hekf0"]
-[ext_resource type="Script" path="res://Characters/State.gd" id="6_gf43i"]
 [ext_resource type="Script" path="res://Characters/Enemies/Bee/FlyState.gd" id="7_i84fy"]
 [ext_resource type="Script" path="res://Characters/Enemies/HitState.gd" id="8_6s4a5"]
 [ext_resource type="Script" path="res://Characters/Enemies/Bee/AttackState.gd" id="8_flv3e"]
 [ext_resource type="Script" path="res://Characters/Enemies/Bee/Stinger.gd" id="9_hpa7m"]
+[ext_resource type="Script" path="res://Characters/Enemies/Bee/DeadState.gd" id="9_ouoik"]
 [ext_resource type="Script" path="res://Characters/FacingCollisionShape2D.gd" id="10_b1yw6"]
 [ext_resource type="Script" path="res://Characters/Enemies/Bee/PlayerDetection.gd" id="11_1yfar"]
+[ext_resource type="PackedScene" uid="uid://2a5qnaobbs4h" path="res://items/coin.tscn" id="11_856iq"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wbrvv"]
 radius = 12.0
@@ -256,8 +257,6 @@ states/hit/position = Vector2(314.485, 23.495)
 transitions = ["Start", "fly", SubResource("AnimationNodeStateMachineTransition_p4y1f"), "fly", "hit", SubResource("AnimationNodeStateMachineTransition_0nrpt"), "fly", "attack", SubResource("AnimationNodeStateMachineTransition_lux7o"), "attack", "fly", SubResource("AnimationNodeStateMachineTransition_3vsot"), "hit", "fly", SubResource("AnimationNodeStateMachineTransition_t26nv"), "hit", "dead", SubResource("AnimationNodeStateMachineTransition_ylyhr")]
 graph_offset = Vector2(96.7101, -53.82)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_5g3e7"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tenrk"]
 size = Vector2(4.3125, 5.125)
 
@@ -284,7 +283,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_2o4jm")
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_5g3e7")
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("4_rngo5")
@@ -309,7 +307,8 @@ attack_animation_name = "attack"
 can_move = false
 
 [node name="Dead" type="Node" parent="CharacterStateMachine"]
-script = ExtResource("6_gf43i")
+script = ExtResource("9_ouoik")
+PICKUP_SCENE = ExtResource("11_856iq")
 can_move = false
 
 [node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("damageable", "move_state", "dead_state")]

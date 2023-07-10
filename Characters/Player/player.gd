@@ -1,5 +1,4 @@
 extends CharacterBody2D
-
 class_name Player
 
 @export var speed : float = 200.0
@@ -14,6 +13,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var direction : Vector2 = Vector2.ZERO
 
 signal facing_direction_changed(facing_right: bool)
+signal collected(collectable)
 
 func _ready():
 	animation_tree.active = true
@@ -45,3 +45,7 @@ func update_facing_direction():
 		sprite.flip_h = true
 
 	emit_signal("facing_direction_changed", !sprite.flip_h)
+
+func collect(collectable):
+	collected.emit(collectable)
+	

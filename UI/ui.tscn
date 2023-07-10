@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=3 uid="uid://dgmghnpy476qc"]
+
+[sub_resource type="GDScript" id="GDScript_maoj5"]
+script/source = "extends CanvasLayer
+class_name UI
+
+@onready var score_label = %Score
+
+var score = 0:
+	set(new_score):
+		score = new_score
+		_update_score_label(new_score)
+
+func _ready():
+	_update_score_label(score)
+
+func _update_score_label(new_score):
+	score_label.text = str(new_score)
+
+func _on_collected(collectable) -> void:
+	if collectable:
+		score += 1
+"
+
+[node name="UI" type="CanvasLayer"]
+script = SubResource("GDScript_maoj5")
+
+[node name="Score" type="Label" parent="."]
+unique_name_in_owner = true
+offset_right = 40.0
+offset_bottom = 23.0

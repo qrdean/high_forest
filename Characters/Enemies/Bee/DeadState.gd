@@ -1,6 +1,6 @@
 extends State
 
-@export var dead_animation_node : String = "dead"
+@export var dead_animation_node = "dead"
 @export var PICKUP_SCENE: PackedScene
 
 func on_enter():

@@ -1,4 +1,4 @@
-[gd_scene load_steps=50 format=3 uid="uid://m1k5pv7c671g"]
+[gd_scene load_steps=49 format=3 uid="uid://m1k5pv7c671g"]
 
 [ext_resource type="Script" path="res://Characters/Player/player.gd" id="1_s4axf"]
 [ext_resource type="Texture2D" uid="uid://ch7o12hefv1ej" path="res://Art/Character/Idle/Idle-Sheet.png" id="1_wpr56"]
@@ -440,8 +440,6 @@ states/jump_start/position = Vector2(426.34, 11.9275)
 transitions = ["Start", "Move", SubResource("AnimationNodeStateMachineTransition_3tv7s"), "Move", "jump_start", SubResource("AnimationNodeStateMachineTransition_kp0ce"), "jump_start", "jump_end", SubResource("AnimationNodeStateMachineTransition_6t7nf"), "jump_end", "Move", SubResource("AnimationNodeStateMachineTransition_2yju5"), "Move", "attack_1", SubResource("AnimationNodeStateMachineTransition_d5mbo"), "attack_1", "Move", SubResource("AnimationNodeStateMachineTransition_7w5r0"), "attack_1", "attack_2", SubResource("AnimationNodeStateMachineTransition_ooptl"), "attack_2", "Move", SubResource("AnimationNodeStateMachineTransition_efe8n"), "Move", "dead", SubResource("AnimationNodeStateMachineTransition_ygbrs")]
 graph_offset = Vector2(90.0578, 4.77651)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_evlvx"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mcaou"]
 size = Vector2(24, 50.5)
 
@@ -466,7 +464,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_hlb5u")
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_evlvx")
 parameters/Move/blend_position = 0.00489402
 
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]

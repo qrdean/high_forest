@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://Characters/State.gd" id="7_2r3nj"]
 [ext_resource type="Script" path="res://Characters/Enemies/HitState.gd" id="8_60oir"]
 [ext_resource type="Script" path="res://Characters/Enemies/Snail/DeadState.gd" id="8_abt0o"]
+[ext_resource type="PackedScene" uid="uid://2a5qnaobbs4h" path="res://items/coin.tscn" id="10_6dfnx"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24tsc"]
 size = Vector2(27, 22)
@@ -188,8 +189,6 @@ states/walk/position = Vector2(346.743, 101.433)
 transitions = ["Start", "walk", SubResource("AnimationNodeStateMachineTransition_svk1c"), "walk", "hide", SubResource("AnimationNodeStateMachineTransition_crfae"), "walk", "dead", SubResource("AnimationNodeStateMachineTransition_tgsoe"), "hide", "dead", SubResource("AnimationNodeStateMachineTransition_owjre"), "hide", "walk", SubResource("AnimationNodeStateMachineTransition_rdkya")]
 graph_offset = Vector2(70.065, 56.5725)
 
-[sub_resource type="AnimationNodeStateMachinePlayback" id="AnimationNodeStateMachinePlayback_1umrw"]
-
 [node name="snail" type="CharacterBody2D" node_paths=PackedStringArray("hit_state")]
 collision_layer = 4
 script = ExtResource("1_q1p2b")
@@ -211,7 +210,6 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_sfkg5")
 anim_player = NodePath("../AnimationPlayer")
-parameters/playback = SubResource("AnimationNodeStateMachinePlayback_1umrw")
 
 [node name="Damageable" type="Node" parent="."]
 script = ExtResource("5_8x0eh")
@@ -227,6 +225,7 @@ script = ExtResource("7_2r3nj")
 
 [node name="Dead" type="Node" parent="CharacterStateMachine"]
 script = ExtResource("8_abt0o")
+PICKUP_SCENE = ExtResource("10_6dfnx")
 can_move = false
 
 [node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("damageable", "move_state", "dead_state")]
