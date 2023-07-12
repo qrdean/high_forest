@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://dmgg2vhnaaffj"]
+
+[ext_resource type="Script" path="res://UI/health_node.gd" id="1_4d2k8"]
+[ext_resource type="Texture2D" uid="uid://c8tea7lvdvtaj" path="res://Art/HUD/Base-01.png" id="1_50deh"]
+
+[node name="Health Node" type="Node2D" node_paths=PackedStringArray("health_empty", "health_pip")]
+script = ExtResource("1_4d2k8")
+health_empty = NodePath("Health Placeholder")
+health_pip = NodePath("Health")
+
+[node name="Health Placeholder" type="Sprite2D" parent="."]
+texture = ExtResource("1_50deh")
+region_enabled = true
+region_rect = Rect2(2.88931, 129.782, 11.4861, 12.2969)
+
+[node name="Health" type="Sprite2D" parent="."]
+texture = ExtResource("1_50deh")
+region_enabled = true
+region_rect = Rect2(2.83472, 113.702, 11.4861, 12.1618)

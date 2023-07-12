@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Snail
 
 @export var speed : float = 30.0
 @export var hit_state : State

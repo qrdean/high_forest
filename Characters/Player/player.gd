@@ -14,6 +14,7 @@ var direction : Vector2 = Vector2.ZERO
 
 signal facing_direction_changed(facing_right: bool)
 signal collected(collectable)
+signal damaged()
 
 func _ready():
 	animation_tree.active = true
@@ -48,4 +49,6 @@ func update_facing_direction():
 
 func collect(collectable):
 	collected.emit(collectable)
-	
+
+func damage():
+	damaged.emit()

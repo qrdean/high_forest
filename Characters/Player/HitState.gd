@@ -19,7 +19,9 @@ func on_enter():
 func on_exit():
 	character.velocity = Vector2.ZERO
 
-func on_damageable_hit(_node : Node, _damage_amount : int, knockback_direction : Vector2):
+func on_damageable_hit(node : Node, _damage_amount : int, knockback_direction : Vector2):
+	if node is Player:
+			node.damage()
 	if(damageable.health > 0):
 		character.velocity = knockback_speed * knockback_direction
 		emit_signal("interrupt_state", self)
