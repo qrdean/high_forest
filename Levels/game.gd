@@ -16,9 +16,9 @@ func _ready():
 	if !player.damaged.is_connected(ui._on_damage):
 		player.damaged.connect(ui._on_damage)
 	
-	for i in range(0, 125):
-		_spawn_snail()
-		_spawn_bee()
+	# for i in range(0, 125):
+	# 	_spawn_snail()
+	# 	_spawn_bee()
 
 func _spawn_bee():
 	var newBee = bee.instantiate() as Bee

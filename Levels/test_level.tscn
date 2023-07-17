@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://dlbc78imgook2"]
+[gd_scene load_steps=18 format=3 uid="uid://dlbc78imgook2"]
 
 [ext_resource type="Texture2D" uid="uid://dr6j7k6pi0x66" path="res://Art/Background/Background.png" id="1_46iv5"]
 [ext_resource type="Texture2D" uid="uid://ypymjh6oxd1d" path="res://Art/Assets/Tiles.png" id="1_d5bi2"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://bnqqxv3r0ckgi" path="res://Characters/snail.tscn" id="3_tfe26"]
 [ext_resource type="PackedScene" uid="uid://cy7l3grum7tjf" path="res://Characters/Enemies/Bee/bee.tscn" id="5_jrfg2"]
 [ext_resource type="PackedScene" uid="uid://2a5qnaobbs4h" path="res://items/coin.tscn" id="6_f3tth"]
+[ext_resource type="PackedScene" uid="uid://bx73dh6t81k5v" path="res://Characters/Enemies/Boar/boar.tscn" id="10_eljpl"]
 [ext_resource type="PackedScene" uid="uid://dgmghnpy476qc" path="res://UI/ui.tscn" id="10_n1woc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fubol"]
@@ -3044,8 +3045,14 @@ position = Vector2(285, 132)
 movement_target_position_1 = Vector2(20, 130)
 movement_target_position_2 = Vector2(450, 130)
 
+[node name="Boar" parent="." instance=ExtResource("10_eljpl")]
+position = Vector2(828, 159)
+movement_target_position_1 = Vector2(20, 180)
+movement_target_position_2 = Vector2(750, 180)
+
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(58, 95)
+scale = Vector2(1.61233, 1.04591)
 navigation_polygon = SubResource("NavigationPolygon_elgvx")
 
 [node name="coin2" parent="." instance=ExtResource("6_f3tth")]
