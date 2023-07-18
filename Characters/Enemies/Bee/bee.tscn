@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://cy7l3grum7tjf"]
+[gd_scene load_steps=36 format=3 uid="uid://cy7l3grum7tjf"]
 
 [ext_resource type="Texture2D" uid="uid://cb550r1hgq8yy" path="res://Art/Mob/Small Bee/Fly/Fly-Sheet.png" id="1_6s88n"]
 [ext_resource type="Texture2D" uid="uid://lbqe24qw305p" path="res://Art/Mob/Small Bee/Hit/Hit-Sheet.png" id="1_a6153"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" path="res://Characters/FacingCollisionShape2D.gd" id="10_b1yw6"]
 [ext_resource type="Script" path="res://Characters/Enemies/Bee/PlayerDetection.gd" id="11_1yfar"]
 [ext_resource type="PackedScene" uid="uid://2a5qnaobbs4h" path="res://items/coin.tscn" id="11_856iq"]
+[ext_resource type="AudioStream" uid="uid://mqnkgl1x7y3n" path="res://Sounds/breeze-of-blood-122253.mp3" id="15_0vajf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wbrvv"]
 radius = 12.0
@@ -284,8 +285,9 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_2o4jm")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="Damageable" type="Node" parent="."]
+[node name="Damageable" type="Node" parent="." node_paths=PackedStringArray("hit_sound")]
 script = ExtResource("4_rngo5")
+hit_sound = NodePath("../HitSound")
 
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("5_hekf0")
@@ -352,6 +354,10 @@ shape = SubResource("RectangleShape2D_pmjxk")
 script = ExtResource("10_b1yw6")
 facing_left_position = Vector2(17, 21)
 facing_right_position = Vector2(-17, 21)
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("15_0vajf")
+pitch_scale = 4.0
 
 [connection signal="animation_finished" from="AnimationTree" to="Damageable" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]

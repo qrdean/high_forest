@@ -8,6 +8,7 @@ class_name GroundState
 
 @export var attack_state : State
 @export var attack_animation : String
+@export var audio_stream_player: AudioStreamPlayer
 
 func state_process(_delta):
 	if(!character.is_on_floor()):
@@ -27,3 +28,4 @@ func jump():
 func attack():
 	next_state = attack_state
 	playback.travel(attack_animation)
+	

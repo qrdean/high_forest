@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://bnqqxv3r0ckgi"]
+[gd_scene load_steps=27 format=3 uid="uid://bnqqxv3r0ckgi"]
 
 [ext_resource type="Texture2D" uid="uid://cox6ln125ntnk" path="res://Art/Mob/Snail/walk-Sheet.png" id="1_bx6v0"]
 [ext_resource type="Script" path="res://Characters/Enemies/Snail/snail.gd" id="1_q1p2b"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" path="res://Characters/Enemies/HitState.gd" id="8_60oir"]
 [ext_resource type="Script" path="res://Characters/Enemies/Snail/DeadState.gd" id="8_abt0o"]
 [ext_resource type="PackedScene" uid="uid://2a5qnaobbs4h" path="res://items/coin.tscn" id="10_6dfnx"]
+[ext_resource type="AudioStream" uid="uid://mqnkgl1x7y3n" path="res://Sounds/breeze-of-blood-122253.mp3" id="11_fhw1q"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_24tsc"]
 size = Vector2(27, 22)
@@ -211,8 +212,9 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_sfkg5")
 anim_player = NodePath("../AnimationPlayer")
 
-[node name="Damageable" type="Node" parent="."]
+[node name="Damageable" type="Node" parent="." node_paths=PackedStringArray("hit_sound")]
 script = ExtResource("5_8x0eh")
+hit_sound = NodePath("../HitSound")
 
 [node name="CharacterStateMachine" type="Node" parent="." node_paths=PackedStringArray("character", "animation_tree", "current_state")]
 script = ExtResource("6_6rrx2")
@@ -240,6 +242,10 @@ wait_time = 0.25
 one_shot = true
 
 [node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_fhw1q")
+pitch_scale = 4.0
 
 [connection signal="animation_finished" from="AnimationTree" to="Damageable" method="_on_animation_tree_animation_finished"]
 [connection signal="timeout" from="CharacterStateMachine/Hit/Timer" to="CharacterStateMachine/Hit" method="_on_timer_timeout"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://2a5qnaobbs4h"]
+[gd_scene load_steps=5 format=3 uid="uid://2a5qnaobbs4h"]
 
 [ext_resource type="Texture2D" uid="uid://ypymjh6oxd1d" path="res://Art/Assets/Tiles.png" id="1_0xyhr"]
 [ext_resource type="Script" path="res://items/coinArea2d.gd" id="2_kng3l"]
+[ext_resource type="AudioStream" uid="uid://ddbdmjtgprbn8" path="res://Sounds/collectcoin-6075.mp3" id="3_rmc01"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_iindq"]
 radius = 5.0
@@ -20,4 +21,8 @@ region_rect = Rect2(242.116, 337.433, 12.3966, 11.8895)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_iindq")
 
+[node name="CoinCollect" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_rmc01")
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered" flags=18]
+[connection signal="finished" from="CoinCollect" to="." method="_on_coin_collect_finished"]

@@ -10,7 +10,6 @@ extends State
 var can_attack: bool = true
 
 func on_enter():
-	print_debug("Entering walk state")
 	playback.travel(walk_animation_node)
 	timer.start()
 
@@ -22,7 +21,6 @@ func on_exit():
 
 func _on_player_detection_body_entered(body):
 	if body is Player:
-		print_debug("Player detected")
 		attack()
 
 func _on_timer_timeout():

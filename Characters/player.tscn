@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://m1k5pv7c671g"]
+[gd_scene load_steps=52 format=3 uid="uid://m1k5pv7c671g"]
 
 [ext_resource type="Script" path="res://Characters/Player/player.gd" id="1_s4axf"]
 [ext_resource type="Texture2D" uid="uid://ch7o12hefv1ej" path="res://Art/Character/Idle/Idle-Sheet.png" id="1_wpr56"]
@@ -18,6 +18,9 @@
 [ext_resource type="Script" path="res://Characters/Player/HitState.gd" id="14_l0h2w"]
 [ext_resource type="Script" path="res://Characters/Damageable.gd" id="15_uap42"]
 [ext_resource type="Script" path="res://Characters/Player/Sword.gd" id="16_rardi"]
+[ext_resource type="AudioStream" uid="uid://btv5ixe5lv42f" path="res://Sounds/swoosh-sound-effect-for-fight-scenes-or-transitions-2-149890.mp3" id="19_cxjii"]
+[ext_resource type="AudioStream" uid="uid://mqnkgl1x7y3n" path="res://Sounds/breeze-of-blood-122253.mp3" id="20_ur6y2"]
+[ext_resource type="AudioStream" uid="uid://b74c751vvkhny" path="res://Sounds/cat-meow-14536.mp3" id="21_4xrny"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_pyb61"]
 height = 45.0
@@ -472,13 +475,14 @@ character = NodePath("..")
 animation_tree = NodePath("../AnimationTree")
 current_state = NodePath("Ground")
 
-[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "attack_state")]
+[node name="Ground" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("air_state", "attack_state", "audio_stream_player")]
 script = ExtResource("9_sgbbb")
 jump_velocity = -350.0
 air_state = NodePath("../Air")
 jump_animation = "jump_start"
 attack_state = NodePath("../Attack")
 attack_animation = "attack_1"
+audio_stream_player = NodePath("../../SwordSwipe")
 
 [node name="Air" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("landing_state")]
 script = ExtResource("10_6fwbk")
@@ -490,15 +494,17 @@ script = ExtResource("11_ricie")
 ground_state = NodePath("../Ground")
 landing_animation_name = "jump_end"
 
-[node name="Attack" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state")]
+[node name="Attack" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("ground_state", "audio_stream_player")]
 script = ExtResource("12_msrwl")
 ground_state = NodePath("../Ground")
 attack_animation_name = "attack"
 attack_animation_2 = "attack_2"
+audio_stream_player = NodePath("../../SwordSwipe")
 can_move = false
 
-[node name="Dead" type="Node" parent="CharacterStateMachine"]
+[node name="Dead" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("death_sound")]
 script = ExtResource("13_ocsup")
+death_sound = NodePath("../../death")
 can_move = false
 
 [node name="Hit" type="Node" parent="CharacterStateMachine" node_paths=PackedStringArray("damageable", "walk_state", "dead_state")]
@@ -535,11 +541,24 @@ script = ExtResource("14_agrw2")
 facing_left_position = Vector2(-27, 2.08165e-12)
 facing_right_position = Vector2(27, 2.08165e-12)
 
-[node name="Damageable" type="Node" parent="."]
+[node name="Damageable" type="Node" parent="." node_paths=PackedStringArray("hit_sound")]
 script = ExtResource("15_uap42")
 health = 30.0
+hit_sound = NodePath("../HitSound")
+
+[node name="SwordSwipe" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("19_cxjii")
+
+[node name="HitSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("20_ur6y2")
+pitch_scale = 4.0
+
+[node name="death" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("21_4xrny")
+pitch_scale = 0.34
 
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Landing" method="_on_animation_tree_animation_finished"]
 [connection signal="animation_finished" from="AnimationTree" to="CharacterStateMachine/Attack" method="_on_animation_tree_animation_finished"]
+[connection signal="dead" from="CharacterStateMachine/Dead" to="." method="_on_dead_dead"]
 [connection signal="timeout" from="CharacterStateMachine/Hit/Timer" to="CharacterStateMachine/Hit" method="_on_timer_timeout"]
 [connection signal="body_entered" from="Sword" to="Sword" method="_on_body_entered"]

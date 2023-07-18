@@ -11,11 +11,9 @@ class_name BoarIdleState
 var can_charge: bool = true
 
 func _ready():
-	print_debug("BoarIdleState ready")
 	timer.start()
 
 func on_enter():
-	print_debug("stuff")
 	playback.travel(idle_animation_node)
 	timer.start()
 
@@ -26,11 +24,8 @@ func attack():
 	next_state = run_state
 
 func _on_player_detection_body_entered(body):
-	print_debug("playerdetected:", body.name)
 	if body is Player:
-		print_debug("playerdetected:", body.name)
 		attack()
 
 func _on_timer_timeout():
-	print_debug("Timer timeout")
 	next_state = walk_state

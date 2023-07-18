@@ -1,0 +1,43 @@
+[gd_scene load_steps=3 format=3 uid="uid://ijcrw88jjwc3"]
+
+[ext_resource type="Script" path="res://Levels/win_popup2.gd" id="1_fe66c"]
+[ext_resource type="AudioStream" uid="uid://bll50330n8qdv" path="res://Sounds/3-up-2-89189.mp3" id="2_w0c1m"]
+
+[node name="win_popup2" type="CanvasLayer"]
+process_mode = 3
+visible = false
+script = ExtResource("1_fe66c")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "You win"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+
+[node name="Resume" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+text = "Keep Killing Boars 'n Shit
+"
+
+[node name="WinSound" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_w0c1m")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/Resume" to="." method="_on_resume_pressed"]

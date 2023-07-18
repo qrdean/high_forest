@@ -7,8 +7,12 @@
 script/source = "extends CanvasLayer
 class_name UI
 
+@export var win_con: int = 10
+
 @onready var score_label = %Score
 @onready var health_container = $HealthContainer
+
+signal win()
 
 var score = 0:
 	set(new_score):
@@ -24,9 +28,15 @@ func _update_score_label(new_score):
 func _on_collected(collectable) -> void:
 	if collectable:
 		score += 1
+		if score > 10:
+			win.emit()
 		
 func _on_damage() -> void:
 	health_container.take_damage()
+
+
+func _on_lose_popup_restart():
+	score = 0
 "
 
 [node name="UI" type="CanvasLayer"]

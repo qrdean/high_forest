@@ -16,6 +16,8 @@ signal facing_direction_changed(facing_right: bool)
 signal collected(collectable)
 signal damaged()
 
+signal dead()
+
 func _ready():
 	animation_tree.active = true
 
@@ -52,3 +54,7 @@ func collect(collectable):
 
 func damage():
 	damaged.emit()
+
+
+func _on_dead_dead():
+	dead.emit()

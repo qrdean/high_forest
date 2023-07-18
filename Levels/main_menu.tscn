@@ -1,0 +1,81 @@
+[gd_scene load_steps=4 format=3 uid="uid://cc2mi12ixdoi"]
+
+[ext_resource type="Script" path="res://Levels/MainMenu/main_menu.gd" id="1_84ma4"]
+[ext_resource type="AudioStream" uid="uid://c45exvv87qk10" path="res://Sounds/shhhhh-85500.mp3" id="2_y5gv4"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_u7fmh"]
+font_size = 40
+
+[node name="main_menu" type="Node"]
+process_mode = 3
+script = ExtResource("1_84ma4")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_left = -24.0
+offset_top = -13.0
+offset_right = 1182.0
+offset_bottom = 668.0
+color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+text = "Some Dumbass Kills 
+Boars and Snails
+"
+label_settings = SubResource("LabelSettings_u7fmh")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+
+[node name="Start" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_vertical = 4
+text = "Start
+"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+
+[node name="ShutUp" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer2"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Shut UP
+"
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 200
+theme_override_constants/margin_right = 200
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer/MarginContainer3"]
+layout_mode = 2
+size_flags_vertical = 8
+text = "Yeah Go Ahead and Quit Loser
+"
+
+[node name="Shh" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_y5gv4")
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer/Start" to="." method="_on_start_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer2/ShutUp" to="." method="_on_shut_up_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/MarginContainer3/Quit" to="." method="_on_quit_pressed"]
