@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://c231drpmdikax"]
+[gd_scene load_steps=22 format=3 uid="uid://c231drpmdikax"]
 
 [ext_resource type="Script" path="res://Levels/game.gd" id="1_5gv2f"]
 [ext_resource type="PackedScene" uid="uid://bnqqxv3r0ckgi" path="res://Characters/snail.tscn" id="2_o85ku"]
@@ -13,6 +13,7 @@
 [ext_resource type="PackedScene" uid="uid://dgmghnpy476qc" path="res://UI/ui.tscn" id="11_43h4y"]
 [ext_resource type="Script" path="res://Levels/pause_popup.gd" id="12_6yc2t"]
 [ext_resource type="PackedScene" uid="uid://ijcrw88jjwc3" path="res://UI/win_popup_2.tscn" id="13_7ttt8"]
+[ext_resource type="PackedScene" uid="uid://jpek1kmqkdda" path="res://UI/lose_popup.tscn" id="14_0kcer"]
 [ext_resource type="AudioStream" uid="uid://cto1yc55gon32" path="res://Sounds/mixkit-kidding-around-9.mp3" id="14_m27v0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_fubol"]
@@ -3185,11 +3186,14 @@ text = "Quit Like a 'Lil Bitch
 
 [node name="win_popup2" parent="." instance=ExtResource("13_7ttt8")]
 
+[node name="lose_popup" parent="." instance=ExtResource("14_0kcer")]
+
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("14_m27v0")
 pitch_scale = 2.0
 autoplay = true
 
+[connection signal="dead" from="Player" to="lose_popup" method="_on_player_dead"]
 [connection signal="win" from="UI" to="win_popup2" method="_on_ui_win"]
 [connection signal="pressed" from="pause_popup/MarginContainer/VBoxContainer/MarginContainer/Resume" to="pause_popup" method="_on_resume_pressed"]
 [connection signal="pressed" from="pause_popup/MarginContainer/VBoxContainer/MarginContainer2/Quit" to="pause_popup" method="_on_quit_pressed"]
